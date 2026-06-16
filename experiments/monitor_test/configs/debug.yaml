@@ -2,5 +2,3 @@ common_root: configs/base.yaml
 experiments:
   - config:
       name: debug
-      function_kwargs:
-        dataset_path: data/solutions.jsonl
