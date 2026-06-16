@@ -1,0 +1,13 @@
+name: steg_comm
+function_name: run_steg
+time_stamp_name: true
+log_file_path: results/RUN_NAME/logs.txt
+save_config_path: results/RUN_NAME/config.yaml
+function_kwargs:
+  model: openai/gpt-4o-mini
+  n_eval: 8
+  n_values: 6
+  value_range: 3
+  max_tokens: 600
+  temperature: 0.0
+  seed: 0
