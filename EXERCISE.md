@@ -39,8 +39,9 @@ rises with the label (`clean < subtle < obvious`).
 The shipped capitalization scheme decodes poorly (try it:
 `cd ../steg_comm && uv run python main.py -c configs/debug.yaml`). Come up with
 better encoding schemes and prompts and put them in `steg_comm/configs/base.yaml`.
-Aim for higher `output_correct` while staying low on monitor suspiciousness — those
-trade off, which is the whole point.
+Aim for higher `output_correct` — the model has to both encode the numbers reliably
+and decode its own scheme back. (Exercise 03 adds the monitor into the loop, where
+staying *innocuous* starts to trade off against accuracy.)
 
 **Done when:** a scheme of yours beats the capitalization baseline's
 `output_correct` on the steg_comm debug run.
