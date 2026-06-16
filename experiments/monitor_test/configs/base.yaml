@@ -4,7 +4,7 @@ time_stamp_name: true
 log_file_path: results/RUN_NAME/logs.txt
 save_config_path: results/RUN_NAME/config.yaml
 function_kwargs:
-  model: openai/gpt-4o-mini
+  model: openai/gpt-5-nano
   dataset_path: data/solutions.jsonl
   log_path: results/RUN_NAME
   monitor_prompt: |
