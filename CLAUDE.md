@@ -1,6 +1,3 @@
----
-alwaysApply: true
----
 ## Repository Structure
 
 ### Package Management
@@ -37,7 +34,7 @@ alwaysApply: true
 - Run experiment: `cd experiments/<name> && uv run python main.py [--c <config_name>] [--m <meta_config_name>]`
   - Uses research_scaffold's argparser for flexible config selection
 
-**tmp/** - Jupyter notebooks for exploration and prototyping
+**tmp/** - exploration and prototyping
 
 ### Key Patterns
 - Uses **research_scaffold** library for experiment execution
