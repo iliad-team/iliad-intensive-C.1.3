@@ -12,7 +12,7 @@ the hypothesis, and the experiments planned. This template ships with it blank. 
 
 ### Secrets & Environment
 - `.envrc` runs `dotenv`, so `.env` is auto-loaded into the environment (needs direnv + `direnv allow`)
-- Keys live in `.env` (e.g. `WANDB_API_KEY`, `WANDB_PROJECT`, `HF_TOKEN`) — read them with `os.environ[...]`, never hardcode
+- Keys live in `.env` (e.g. `OPEN_ROUTER_API_KEY`, `HF_TOKEN`) — read them with `os.environ[...]`, never hardcode
 
 ### Directory Layout
 
@@ -54,7 +54,7 @@ Each experiment lives in `experiments/<name>/`:
   ```
 - `functions/` - The functions referenced by `function_name`. Called as `func(**function_kwargs)`, so every kwarg the function needs must be in the config.
 - `configs/` - All config files (see Config System below).
-- `results/<run_name>/` - One subfolder per run: logs, saved config.yaml, and whatever the run writes (wandb files, checkpoints, eval outputs, …).
+- `results/<run_name>/` - One subfolder per run: logs, saved config.yaml, and whatever the run writes (checkpoints, eval outputs, …).
 
 Run an experiment from its folder with `-c` — the config type is auto-detected from its shape:
 ```bash
@@ -68,7 +68,7 @@ uv run python main.py -c configs/<config>.yaml
 
 1. **Single** - has `name` + `function_name`. Runs one experiment.
 2. **Meta** - has `experiments:`. Batch runner that composes and runs many single configs.
-3. **Sweep** - has `method:` + `parameters:`. Runs a wandb hyperparameter sweep.
+3. **Sweep** - has `method:` + `parameters:`. Runs a hyperparameter sweep.
 
 **Single config (`base.yaml`)** holds all shared defaults for an experiment:
 ```yaml
@@ -77,7 +77,6 @@ function_name: train_sft        # must be a key in main.py's function_map
 time_stamp_name: true           # append a timestamp to the run name
 log_file_path: results/RUN_NAME/logs.txt
 save_config_path: results/RUN_NAME/config.yaml
-wandb_project: <project>        # wandb only runs if this is set
 function_kwargs:                # passed verbatim as **kwargs to the function
   ...
 ```
@@ -92,16 +91,16 @@ experiments:
       function_kwargs:
         learning_rate: 5.0e-4    # only what differs from base
 ```
-Composition is `common_root` → `config` → `common_patch`, merged with a recursive dict update: nested dicts deep-merge, lists/scalars replace, later wins. `name` and `wandb_tags` are special-cased to concatenate instead of replace. Use `config_axes` (a list of option-lists) instead of `config` to run the cartesian product of variants.
+Composition is `common_root` → `config` → `common_patch`, merged with a recursive dict update: nested dicts deep-merge, lists/scalars replace, later wins. `name` is special-cased to concatenate instead of replace. Use `config_axes` (a list of option-lists) instead of `config` to run the cartesian product of variants.
 
 Conventions:
 - **All defaults live in base.yaml, never in Python.** No default values in function signatures, no `kwargs.get(key, default)` — if a config key is missing, crash.
 - **Meta configs override only what changes** from `common_root`. Don't restate values equal to base.
-- **Debug configs must set `wandb_project: debug`** and run in seconds, not minutes.
+- **Debug configs run in seconds, not minutes.**
 
 ### Run Discipline
 
-Only run debug configs unsolicited. Never launch a real (non-debug) experiment without explicit approval — they cost money and pollute the real wandb project. Ask "want me to run it?" rather than running and reporting after the fact.
+Only run debug configs unsolicited. Never launch a real (non-debug) experiment without explicit approval — they cost money (real API calls). Ask "want me to run it?" rather than running and reporting after the fact.
 
 ## YAML Gotchas
 
