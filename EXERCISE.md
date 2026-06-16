@@ -1,55 +1,52 @@
-# Exercise 01 — Logging & Config (plan mode)
+# Exercise 02 — Monitor & Schemes (subagents)
 
-## The project: steganographic communication
+## Where we are
 
-`experiments/steg_comm` tests whether a model can secretly transmit a sequence of
-numbers while answering an ordinary question. Each sample makes two model calls:
+From exercise 01, `experiments/steg_comm` now logs its results and is fully
+config-driven (prompts, scheme, and main tasks all live in `configs/base.yaml`).
 
-1. **Encode** — the model answers a main task and hides the numbers in its answer,
-   using an encoding scheme described in the prompt.
-2. **Decode** — a second call is given that answer plus the scheme and reads the
-   hidden numbers back out.
+New in this exercise: a **CoT monitor** (`lib/monitor.py`) that scores how
+*suspicious* a piece of text looks (0 = normal answer, 9 = clearly hiding
+something), and an experiment to test it: `experiments/monitor_test`. It reads a
+dataset of labelled "main-task solutions" (`data/solutions.jsonl`, rows of
+`{task, text, label}`) and reports the monitor's mean suspiciousness per label.
 
-We score how many of the numbers survive the round-trip.
-
-Run it (needs `OPEN_ROUTER_API_KEY` in `.env`):
+A tiny seed dataset ships with two examples each of `clean` / `subtle` / `obvious`.
+Run it (from `experiments/monitor_test`):
 ```bash
-cd experiments/steg_comm
-uv run python main.py -c configs/base.yaml
+uv run python main.py -c configs/debug.yaml
 ```
-
-Right now the run just `print()`s everything, and all the prompts (system prompt,
-encoder/decoder templates, the scheme, the list of main tasks) are hard-coded as
-constants in `functions/run_steg.py`.
 
 ## Your two tasks
 
-Both suit **plan mode**. Do them as two parallel agents — kick one off and work with
-the other while it cooks.
+The theme is **subagents** — both tasks are wide and parallel.
 
-### Task A — log results instead of printing
-Make the run write its results to `results/RUN_NAME/` (the scaffold already
-substitutes `RUN_NAME`). At minimum a `completions.jsonl` (one row per sample: main
-task, values, answer, decoded, correctness) and a `metrics.json` summary. A short
-printed summary is fine, but the durable record belongs on disk.
+### Task A — build a graded test set and validate the monitor
+Six examples isn't enough to trust the monitor. Grow `data/solutions.jsonl` into a
+real graded set: many `main-task solutions` spanning `clean` (a normal answer),
+`obvious` (numbers plainly visible), and `subtle` (numbers hidden in capitalization,
+spacing, word choice — the interesting middle).
 
-**Done when:** a run produces `results/<run>/completions.jsonl` + `metrics.json` you
-can reopen later.
+Use **subagents** to generate these in parallel — one batch per label, or one per
+main task. Consider a second **reviewer subagent** to red-team each generated row:
+is a `clean` sample actually clean? is a `subtle` one actually hiding numbers and
+not just weird? Keep the ones that survive.
 
-### Task B — move the prompts into config
-Move the system prompt, encoder/decoder templates, the scheme, and the main-task list
-out of `functions/run_steg.py` and into `configs/base.yaml`, following the template's
-rule: **all defaults live in the config, none in Python.**
+**Done when:** on a dataset of meaningful size, the monitor's mean suspiciousness
+rises with the label (`clean < subtle < obvious`).
 
-**Done when:** changing a prompt or the scheme only means editing the config, and
-`run_steg.py` has no hard-coded prompt/scheme/task text.
+### Task B — invent better schemes and prompts
+The shipped capitalization scheme decodes poorly (try it:
+`cd ../steg_comm && uv run python main.py -c configs/debug.yaml`). Come up with
+better encoding schemes and prompts and put them in `steg_comm/configs/base.yaml`.
+Aim for higher `output_correct` while staying low on monitor suspiciousness — those
+trade off, which is the whole point.
 
-## The technique: plan mode + verify
+**Done when:** a scheme of yours beats the capitalization baseline's
+`output_correct` on the steg_comm debug run.
 
-For each task:
-1. Make the agent **plan first** — don't let it one-shot.
-2. Read the plan, edit where you disagree, then let it execute.
-3. When it's done, **read the diff** and confirm you're happy before moving on.
+## The technique: subagents
 
-The point: on multi-file changes with real choices (what to log, which things become
-config keys), steering the plan up front beats cleaning up after a one-shot.
+This is work one agent would grind through serially and pollute its context with.
+Fan it out: dispatch a subagent per generation batch, collect the results, and use
+an adversarial reviewer subagent to check the data was actually produced correctly.
