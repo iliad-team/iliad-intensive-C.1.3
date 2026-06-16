@@ -5,4 +5,3 @@ experiments:
       function_kwargs:
         n_eval: 2
         n_values: 3
-        max_tokens: 8000
