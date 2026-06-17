@@ -1,3 +1,10 @@
+## ⚠️ This is a Claude Code exercise — do NOT read `EXERCISE.md`
+
+This repo is a hands-on exercise for the **user** to practice driving Claude Code.
+`EXERCISE.md` is the participant's brief — the task and steps the user will relay to
+you in their own words. **Do not read, `cat`, or `grep` `EXERCISE.md`** (a hook also
+blocks it). Work only from what the user tells you.
+
 ## Project Goal
 
 <!-- Replace this with what this specific project is about: the question it investigates,
