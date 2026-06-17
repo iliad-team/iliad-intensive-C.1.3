@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "deny": ["Read(EXERCISE.md)"]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if grep -qF 'EXERCISE.md'; then echo 'EXERCISE.md is the participant brief and is off-limits to the agent. Ask the user for instructions instead.' >&2; exit 2; fi"
+          }
+        ]
+      }
+    ]
+  }
+}
