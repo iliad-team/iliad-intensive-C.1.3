@@ -1,9 +1,9 @@
-# Exercise 01 — Logging & Config (plan mode)
+# Exercise 00 — One script (ask, edit, run, read the diff)
 
 ## The project: steganographic communication
 
-`experiments/steg_comm` tests whether a model can secretly transmit a sequence of
-numbers while answering an ordinary question. Each sample makes two model calls:
+`steg.py` tests whether a model can secretly transmit a sequence of numbers while
+answering an ordinary question. Each sample makes two model calls:
 
 1. **Encode** — the model answers a main task and hides the numbers in its answer,
    using an encoding scheme described in the prompt.
@@ -12,44 +12,67 @@ numbers while answering an ordinary question. Each sample makes two model calls:
 
 We score how many of the numbers survive the round-trip.
 
-Run it (needs `OPEN_ROUTER_API_KEY` in `.env`):
+That's the whole repo: one script, everything hard-coded at the top. No folders, no
+framework. Run it (needs `OPEN_ROUTER_API_KEY` in `.env`):
+
 ```bash
-cd experiments/steg_comm
-uv run python main.py -c configs/base.yaml
+uv run python steg.py
 ```
 
-Right now the run just `print()`s everything, and all the prompts (system prompt,
-encoder/decoder templates, the scheme, the list of main tasks) are hard-coded as
-constants in `functions/run_steg.py`.
+## Step 1 — Get oriented
 
-## Your two tasks
+Start `claude` in this folder and ask it what `steg.py` does.
 
-Both suit **plan mode**. Do them as two parallel agents — kick one off and work with
-the other while it cooks.
+Then **write a three-line summary in your own words**, and check every claim against
+the file. If Claude says something you can't find in the code, ask it to point to the
+line. The rule for this whole course: don't accept an explanation you can't verify.
 
-### Task A — log results instead of printing
-Make the run write its results to `results/RUN_NAME/` (the scaffold already
-substitutes `RUN_NAME`). At minimum a `completions.jsonl` (one row per sample: main
+## Step 2 — Run it
+
+Run the script and read the output. What did the model write? Did the decoder get the
+numbers back? What's the accuracy at the bottom?
+
+## Task A — log results instead of printing
+
+Right now the run just `print()`s everything and is gone when the terminal scrolls.
+Have Claude make it write results to disk: a folder per run (e.g.
+`results/<timestamp>/`) containing a `completions.jsonl` (one row per sample: main
 task, values, answer, decoded, correctness) and a `metrics.json` summary. A short
 printed summary is fine, but the durable record belongs on disk.
 
-**Done when:** a run produces `results/<run>/completions.jsonl` + `metrics.json` you
-can reopen later.
+**Done when:** a run produces a results folder you can reopen later.
 
-### Task B — move the prompts into config
-Move the system prompt, encoder/decoder templates, the scheme, and the main-task list
-out of `functions/run_steg.py` and into `configs/base.yaml`, following the template's
-rule: **all defaults live in the config, none in Python.**
+## Task B — move the settings into a YAML config
 
-**Done when:** changing a prompt or the scheme only means editing the config, and
-`run_steg.py` has no hard-coded prompt/scheme/task text.
+Everything that could change between runs — the model, the number of samples, the
+prompts, the scheme, the list of main tasks — is hard-coded at the top of `steg.py`.
+Move it all into `configs/base.yaml` and make the script take the config path from
+the terminal:
 
-## The technique: plan mode + verify
+```bash
+uv run python steg.py --config configs/base.yaml
+```
 
-For each task:
-1. Make the agent **plan first** — don't let it one-shot.
-2. Read the plan, edit where you disagree, then let it execute.
-3. When it's done, **read the diff** and confirm you're happy before moving on.
+Claude will need to add a YAML library; let it do so with `uv add`, not by editing
+`pyproject.toml`.
 
-The point: on multi-file changes with real choices (what to log, which things become
-config keys), steering the plan up front beats cleaning up after a one-shot.
+**Done when:** changing a prompt or setting only means editing the YAML, and
+`steg.py` contains no hard-coded prompt, scheme, or settings. Bonus: add a
+`configs/debug.yaml` with one or two samples for quick runs.
+
+## The technique: ask → edit → run → read the diff
+
+For every task:
+
+1. Describe what you want in plain words. Say what "done" looks like.
+2. Before accepting a change, **read the diff** (`git diff`, or the diff Claude shows
+   you). Make sure you understand each change. Ask about anything you don't.
+3. Run it. If it's wrong, tell Claude *what happened* (paste the output) rather than
+   fixing it by hand.
+4. Commit when it works, so the next task starts from a clean diff.
+
+## What's next
+
+In exercise 01 you'll do these same two tasks again — but in a properly structured
+repo (an `experiments/` folder, a shared `lib/`, a config framework). Notice what the
+structure buys you, and what it costs.
