@@ -8,6 +8,7 @@ Each exercise is a branch:
 
 | Branch | Topic |
 |---|---|
+| `claude_code_exercise/00` | One script — ask, edit, run, read the diff |
 | `claude_code_exercise/01` | Logging & config — plan mode |
 | `claude_code_exercise/02` | Monitor & schemes — subagents |
 | `claude_code_exercise/03` | Best scheme & self-invented schemes — worktrees + goal |
