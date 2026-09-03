@@ -4,14 +4,15 @@ Hands-on exercises for learning to work with Claude Code on a small ML research
 codebase. The running project is a steganography study: can a model secretly
 transmit numbers inside an ordinary answer, and can a monitor catch it?
 
-Each exercise is a branch:
+Each exercise is a branch and adds one technique: the basic ask → edit → run → read-the-diff
+loop (00), plan mode (01), subagents (02), worktrees and `/goal` (03).
 
 | Branch | Topic |
 |---|---|
 | `claude_code_exercise/00` | One script — ask, edit, run, read the diff |
 | `claude_code_exercise/01` | Logging & config — plan mode |
 | `claude_code_exercise/02` | Monitor & schemes — subagents |
-| `claude_code_exercise/03` | Best scheme & self-invented schemes — worktrees + goal |
+| `claude_code_exercise/03` | Best scheme & self-invented schemes — worktrees + `/goal` |
 
 Check one out and read its `EXERCISE.md`:
 
