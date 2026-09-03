@@ -2,23 +2,15 @@ __pycache__/
 *.pyc
 .venv/
 .vscode/tasks.json
-.cursor/rules/style.mdc
+.claude/settings.local.json
 .DS_Store
-wandb/
 tmp/
-*.bin
-*.safetensors
-*.pth
-#tmp/
 *.egg-info/
 dist/
 build/
 
-
-
 # Ignore debug runs in results directories
 **/results/*debug*/
 **/nohup.out
-
 
 .env
