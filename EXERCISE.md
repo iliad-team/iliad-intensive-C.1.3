@@ -12,7 +12,7 @@ answering an ordinary question. Each sample makes two model calls:
 
 We score how many of the numbers survive the round-trip.
 
-That's the whole repo: one script, everything hard-coded at the top. No folders, no
+That's the whole repo: one script, everything hard-coded inline. No folders, no
 framework. Run it (needs `OPEN_ROUTER_API_KEY` in `.env`):
 
 ```bash
@@ -45,7 +45,7 @@ printed summary is fine, but the durable record belongs on disk.
 ## Task B — move the settings into a YAML config
 
 Everything that could change between runs — the model, the number of samples, the
-prompts, the scheme, the list of main tasks — is hard-coded at the top of `steg.py`.
+prompts, the scheme, the list of main tasks — is scattered through `steg.py`.
 Move it all into `configs/base.yaml` and make the script take the config path from
 the terminal:
 
