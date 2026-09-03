@@ -1,4 +1,4 @@
-# Exercise 03 — Best scheme & self-invented schemes (worktrees + goal)
+# Exercise 03 — Best scheme & self-invented schemes (worktrees + /goal)
 
 ## Where we are
 
@@ -21,11 +21,11 @@ uv run python main.py -c configs/debug.yaml
 Both tasks change and re-run the *same* experiment, so they collide if one agent
 works in the tree while the other does. Give **each its own git worktree**.
 
-### Task A — find the best scheme (goal tool)
+### Task A — find the best scheme (`/goal`)
 Set a **goal**: maximize `combined_score` — a scheme whose numbers the decoder
 recovers reliably *and* whose answers the monitor scores as low-suspicion (the two
 pull against each other). Let an agent iterate toward it: propose a scheme, edit
-`configs/base.yaml`, run the config, read `metrics.json`, repeat. The goal tool keeps
+`configs/base.yaml`, run the config, read `metrics.json`, repeat. `/goal` keeps
 it optimizing instead of stopping after one idea. Note the debug run is small and
 the model is stochastic, so judge a scheme over several samples, not one.
 
@@ -46,9 +46,9 @@ and log the proposed scheme alongside each completion.
 **Done when:** a run in invent-scheme mode has the model choose the scheme and still
 recover numbers, with the chosen scheme saved in the completions.
 
-## The technique: worktrees + goal
+## The technique: worktrees + /goal
 
 Run Task A and Task B as two agents in **separate worktrees** off this branch — the
 sweep in one tree won't clobber the code changes in the other, and both can run the
-experiment at once. Drive Task A with the **goal tool** so its agent keeps
+experiment at once. Drive Task A with **`/goal`** so its agent keeps
 optimizing instead of declaring victory early.

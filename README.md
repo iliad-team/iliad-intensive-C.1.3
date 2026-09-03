@@ -1,4 +1,4 @@
-# Exercise 03 — Best scheme & self-invented schemes (worktrees + goal)
+# Exercise 03 — Best scheme & self-invented schemes (worktrees + /goal)
 
 Part of the Claude Code exercises for the ILIAD intensive. The brief is in the markdown
 file next to this one. Exercise 00 is the same steganography experiment as a single script;
