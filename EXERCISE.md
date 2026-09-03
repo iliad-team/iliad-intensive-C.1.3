@@ -29,6 +29,10 @@ pull against each other). Let an agent iterate toward it: propose a scheme, edit
 it optimizing instead of stopping after one idea. Note the debug run is small and
 the model is stochastic, so judge a scheme over several samples, not one.
 
+The goal's evaluator only sees what's in the transcript, so phrase the condition
+around visible output, e.g. `/goal combined_score in the latest metrics.json is above
+0.7 and the run used at least 8 samples`.
+
 **Done when:** you have a scheme whose `combined_score` is clearly higher than the
 scheme the experiment ships with.
 
