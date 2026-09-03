@@ -7,8 +7,7 @@ blocks it). Work only from what the user tells you.
 
 ## Project Goal
 
-<!-- Replace this with what this specific project is about: the question it investigates,
-the hypothesis, and the experiments planned. This template ships with it blank. -->
+Steganographic communication: can a model secretly transmit a sequence of numbers while answering an ordinary question? `experiments/steg_comm` encodes numbers into an answer, decodes them back, and scores how many survive the round-trip. A CoT monitor (`lib/monitor.py`) scores how suspicious an answer looks; `experiments/monitor_test` evaluates it on labelled examples.
 
 ## Repository Structure
 
