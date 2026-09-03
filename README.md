@@ -1,25 +1,30 @@
-# ML Research Template
+# ILIAD Intensive C.1.3 — Claude Code exercises
 
-A template where every experiment is a self-contained study — training, eval,
-data generation, analysis — that you can read, run, and reproduce on its own.
+Hands-on exercises for learning to work with Claude Code on a small ML research
+codebase. The running project is a steganography study: can a model secretly
+transmit numbers inside an ordinary answer, and can a monitor catch it?
 
-The idea:
+Each exercise is a branch:
 
-- **Experiments are isolated.** Each lives in its own folder under
-  `experiments/`, with its own entry point, functions, configs, and results.
-- **Config drives everything.** An experiment is a function plus a YAML config.
-  Defaults live in the config, never in Python — a missing key crashes rather
-  than guessing.
-- **One pattern scales.** The same config format runs a single study, a batch of
-  variants from a shared base, or a wandb sweep. Its shape decides which.
-- **Shared code stays small.** Reusable bits live in an installable `lib/`
-  package; everything experiment-specific stays in the experiment.
+| Branch | Topic |
+|---|---|
+| `claude_code_exercise/01` | Logging & config — plan mode |
+| `claude_code_exercise/02` | Monitor & schemes — subagents |
+| `claude_code_exercise/03` | Best scheme & self-invented schemes — worktrees + goal |
 
-Run one from its folder ([uv](https://docs.astral.sh/uv/) manages deps):
+Check one out and read its `EXERCISE.md`:
 
 ```bash
+git checkout claude_code_exercise/01
+```
+
+Setup: [uv](https://docs.astral.sh/uv/) manages deps, and runs need an
+`OPEN_ROUTER_API_KEY` in `.env` (auto-loaded via direnv).
+
+```bash
+uv sync
 cd experiments/<name>
 uv run python main.py -c configs/<config>.yaml
 ```
 
-See `CLAUDE.md` for the full conventions.
+See `CLAUDE.md` for the repo conventions.
