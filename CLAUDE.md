@@ -19,7 +19,7 @@ the hypothesis, and the experiments planned. This template ships with it blank. 
 
 ### Secrets & Environment
 - `.envrc` runs `dotenv`, so `.env` is auto-loaded into the environment (needs direnv + `direnv allow`)
-- Keys live in `.env` (e.g. `OPEN_ROUTER_API_KEY`, `HF_TOKEN`) — read them with `os.environ[...]`, never hardcode
+- Keys live in `.env` (`OPEN_ROUTER_API_KEY`) — read them with `os.environ[...]`, never hardcode
 
 ### Directory Layout
 
