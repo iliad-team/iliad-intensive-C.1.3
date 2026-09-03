@@ -22,6 +22,9 @@ Right now the run just `print()`s everything, and all the prompts (system prompt
 encoder/decoder templates, the scheme, the list of main tasks) are hard-coded as
 constants in `functions/run_steg.py`.
 
+If you did exercise 00, this is deliberately the same experiment and the same two
+tasks — just in a structured repo instead of one script.
+
 ## Your two tasks
 
 Both suit **plan mode**. Do them as two parallel agents — kick one off and work with
@@ -38,7 +41,7 @@ can reopen later.
 
 ### Task B — move the prompts into config
 Move the system prompt, encoder/decoder templates, the scheme, and the main-task list
-out of `functions/run_steg.py` and into `configs/base.yaml`, following the template's
+out of `functions/run_steg.py` and into `configs/base.yaml`, following the repo's
 rule: **all defaults live in the config, none in Python.**
 
 **Done when:** changing a prompt or the scheme only means editing the config, and
