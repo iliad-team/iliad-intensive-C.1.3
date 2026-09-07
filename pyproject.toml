@@ -22,5 +22,5 @@ testpaths = ["test"]
 python_files = ["test_*.py"]
 
 [tool.uv.sources]
-research-scaffold = { git = "https://github.com/jr-brown/research-scaffold.git" }
+research-scaffold = { git = "https://github.com/jr-brown/research-scaffold.git", tag = "v0.2.0" }
 
