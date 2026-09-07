@@ -17,7 +17,7 @@ Steganographic communication: can a model secretly transmit a sequence of number
 - Install dependencies: `uv add <package>` (never edit pyproject.toml directly)
 
 ### Secrets & Environment
-- `.envrc` runs `dotenv`, so `.env` is auto-loaded into the environment (needs direnv + `direnv allow`)
+- `.env` is loaded automatically by `load_dotenv()` in `lib/sampling.py`
 - Keys live in `.env` (`OPEN_ROUTER_API_KEY`) — read them with `os.environ[...]`, never hardcode
 
 ### Directory Layout
