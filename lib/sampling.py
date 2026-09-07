@@ -26,5 +26,6 @@ async def sample(client, model, prompt, system=None, *, max_tokens, temperature)
         messages=build_messages(prompt, system),
         max_tokens=max_tokens,
         temperature=temperature,
+        extra_body={"reasoning": {"effort": "low"}},
     )
     return resp.choices[0].message.content or ""
