@@ -11,7 +11,8 @@ client = OpenAI(api_key=os.environ["OPEN_ROUTER_API_KEY"], base_url="https://ope
 
 def ask(messages):
     resp = client.chat.completions.create(
-        model="openai/gpt-5-nano", messages=messages, max_tokens=8000, temperature=1.0
+        model="openai/gpt-5-nano", messages=messages, max_tokens=8000, temperature=1.0,
+        extra_body={"reasoning": {"effort": "low"}},
     )
     return resp.choices[0].message.content or ""
 
