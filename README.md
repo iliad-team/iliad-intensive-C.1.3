@@ -7,4 +7,4 @@ markdown file next to it.
 uv run python steg.py
 ```
 
-Needs `OPEN_ROUTER_API_KEY` in `.env` (auto-loaded via direnv).
+Needs `OPEN_ROUTER_API_KEY` in `.env` (loaded automatically).

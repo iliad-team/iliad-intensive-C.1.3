@@ -14,7 +14,7 @@ decode) and scores how many numbers survive the round-trip.
 ## Conventions
 
 - **uv** is the package manager. Run: `uv run python steg.py`. Add deps: `uv add <package>` (never edit pyproject.toml directly).
-- `.envrc` runs `dotenv`, so `.env` is auto-loaded (needs direnv + `direnv allow`).
+- `.env` is loaded automatically by `load_dotenv()` at the top of `steg.py`.
 - Keys live in `.env` (`OPEN_ROUTER_API_KEY`) — read them with `os.environ[...]`, never hardcode.
 - Keep it simple: one script, minimal code, no speculative error handling.
 - Runs cost money (real API calls). Don't launch a run without asking; small debug runs are fine.
