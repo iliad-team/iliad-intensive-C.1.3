@@ -11,7 +11,7 @@ the hypothesis, and the experiments planned. This template ships with it blank. 
 - Install dependencies: `uv add <package>` (never edit pyproject.toml directly)
 
 ### Secrets & Environment
-- `.envrc` runs `dotenv`, so `.env` is auto-loaded into the environment (needs direnv + `direnv allow`)
+- `.env` is loaded automatically: call `load_dotenv()` (python-dotenv) where the key is read
 - Keys live in `.env` (`OPEN_ROUTER_API_KEY`) — read them with `os.environ[...]`, never hardcode
 
 ### Directory Layout

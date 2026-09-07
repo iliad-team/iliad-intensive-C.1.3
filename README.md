@@ -21,7 +21,7 @@ git checkout claude_code_exercise/01
 ```
 
 Setup: [uv](https://docs.astral.sh/uv/) manages deps, and runs need an
-`OPEN_ROUTER_API_KEY` in `.env` (auto-loaded via direnv).
+`OPEN_ROUTER_API_KEY` in `.env` (loaded automatically by python-dotenv).
 
 ```bash
 uv sync
