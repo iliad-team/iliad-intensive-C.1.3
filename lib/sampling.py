@@ -1,6 +1,9 @@
 import os
 
 from openai import AsyncOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def build_messages(prompt: str, system: str | None = None) -> list[dict]:

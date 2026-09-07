@@ -10,4 +10,4 @@ cd experiments/<name>
 uv run python main.py -c configs/<config>.yaml
 ```
 
-Needs `OPEN_ROUTER_API_KEY` in `.env` (auto-loaded via direnv). See `CLAUDE.md` for conventions.
+Needs `OPEN_ROUTER_API_KEY` in `.env` (loaded automatically). See `CLAUDE.md` for conventions.
