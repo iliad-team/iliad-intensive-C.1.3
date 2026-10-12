@@ -18,6 +18,7 @@ Install [LazyVim](https://www.lazyvim.org) (needs Neovim ≥ 0.11.2 and git):
 
 ```bash
 brew install neovim
+brew install --cask font-jetbrains-mono-nerd-font  # then select it as your terminal font (for icons)
 mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null  # back up any existing config
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
