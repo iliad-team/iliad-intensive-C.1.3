@@ -11,3 +11,15 @@ uv run python main.py -c configs/<config>.yaml
 ```
 
 Needs `OPEN_ROUTER_API_KEY` in `.env` (loaded automatically). See `CLAUDE.md` for conventions.
+
+## Editor: LazyVim
+
+Install [LazyVim](https://www.lazyvim.org) (needs Neovim ≥ 0.11.2 and git):
+
+```bash
+brew install neovim
+mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null  # back up any existing config
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+nvim  # first launch installs plugins
+```
