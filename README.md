@@ -57,7 +57,7 @@ curl -fsSL https://herdr.dev/install.sh | sh
 
 then run `herdr`. To look at files next to Claude, install [neovim](https://neovim.io/)
 (`brew install neovim` on macOS; on Linux use the [release binaries](https://github.com/neovim/neovim/blob/master/INSTALL.md),
-apt's version is too old) with [LazyVim](https://www.lazyvim.org/installation),
+apt's version is too old) with [LazyVim](https://www.lazyvim.org/installation).
 Plain neovim already takes mouse clicks and scrolling; LazyVim adds a file tree and tabs you
 can click.
 
