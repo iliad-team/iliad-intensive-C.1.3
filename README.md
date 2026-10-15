@@ -76,15 +76,15 @@ loop (00), plan mode (01), subagents (02), worktrees and `/goal` (03).
 
 | Branch | Topic |
 |---|---|
-| `claude_code_exercise/00` | One script — ask, edit, run, read the diff |
-| `claude_code_exercise/01` | Logging & config — plan mode |
-| `claude_code_exercise/02` | Monitor & schemes — subagents |
-| `claude_code_exercise/03` | Best scheme & self-invented schemes — worktrees + `/goal` |
+| `exercise-0` | One script — ask, edit, run, read the diff |
+| `exercise-1` | Logging & config — plan mode |
+| `exercise-2` | Monitor & schemes — subagents |
+| `exercise-3` | Best scheme & self-invented schemes — worktrees + `/goal` |
 
 Check one out and read its `EXERCISE.md`:
 
 ```bash
-git checkout claude_code_exercise/01
+git checkout exercise-1
 ```
 
 Setup: [uv](https://docs.astral.sh/uv/) manages deps, and runs need an
